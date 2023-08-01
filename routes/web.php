@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthentication ;
+use App\Http\Controllers\ControlIpaddress ;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,11 @@ Route::get('/registration',[UserAuthentication::class, 'registration']);
 Route::get('/login',[UserAuthentication::class, 'login']);
 Route::post('/register-user',[UserAuthentication::class, 'newUserRegistration'] )->name('register-user');
 Route::post('/login-user',[UserAuthentication::class, 'newUserLogin'] )->name('login-user');
+
+// here is all the database part
+Route::get('/home',[ControlIpaddress::class, 'ipHome']);
+Route::get('/addip',[ControlIpaddress::class, 'addippage']);
+Route::get('/changeip',[ControlIpaddress::class, 'changeippage']);
+Route::get('/showlist',[ControlIpaddress::class, 'showlistpage']);
+
+Route::post('/addip',[ControlIpaddress::class, 'addip'] )->name('addip');

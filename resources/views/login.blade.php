@@ -13,7 +13,8 @@
                 <div>{{Session::get('success')}}</div>
                 @elseif(Session::has('fail'))
                 <div>{{Session::get('fail')}}</div>
-                @endif @csrf
+                @endif 
+                @csrf
 
                 <label for="email"> Email:</label><br />
                 <input
@@ -25,9 +26,12 @@
 
                 <label for="password"> Password:</label><br />
                 <input type="password" name="password" value="" /><br />
+                <span> @error('password') {{ $message }} @enderror</span><br>
                 <button type="submit">Log In</button><br />
 
                 <a href="registration"> Goto log in </a>
+
+                
             </form>
         </div>
     </body>
