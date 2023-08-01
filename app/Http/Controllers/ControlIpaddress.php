@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Iplist;
 use App\Models\Change;
 use Illuminate\Support\Facades\Hash;
-
+//use Illuminate\Support\Facades\jobproject; 
 use Session;
 class ControlIpaddress extends Controller
 {
@@ -21,13 +21,20 @@ class ControlIpaddress extends Controller
     }
 
 
-    public function changeippage(){
+    public function changeippage($ip_id){
+    //    $ipadd =Iplist::find($ip_id);
+        $ipadd= Iplist::where('id','=',$ip_id)->first();
+        return view('changeip', compact('ipadd'));
+
       //  return view('home');
     }
 
 
     public function showlistpage(){
        // return view('home');
+       $iplists = Iplist::all();
+     // $posts = jobproject::select('SELECT * FROM iplists');
+       return view('showlist', compact('iplists'));
     }
     public function addip(Request $req){
         $req->validate([
@@ -49,11 +56,27 @@ class ControlIpaddress extends Controller
             return back()->with('fail', 'IP address submission failed, Good luck next time.');
 
         }
-
-
-
-        //  return view('addip');
-
     }
+// incomplete complete it after list showing
+    public function changeip(Request $req, $ip_id){
+        $req->validate([
+          //  'ipadd'=>'required|ip|min:1',
+            'labels'=>'required|min:3'
+        ],
+         [
+            'labels'=>'Label must contain 3 words',
+            
+        ]);
+        $ipadd=Iplist::find($ip_id);
+        //$ipadd->labels= $req->input('labels');
+        $ipadd->labels= $req->labels;
+        $ipadd->update();
+        return redirect("/showlist")->with('success', 'Label updated Successfully');
+           // echo "hello";
+    }
+
+    // show all data
+
+    
 
 }

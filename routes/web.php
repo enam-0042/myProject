@@ -26,7 +26,8 @@ Route::post('/login-user',[UserAuthentication::class, 'newUserLogin'] )->name('l
 // here is all the database part
 Route::get('/home',[ControlIpaddress::class, 'ipHome']);
 Route::get('/addip',[ControlIpaddress::class, 'addippage']);
-Route::get('/changeip',[ControlIpaddress::class, 'changeippage']);
 Route::get('/showlist',[ControlIpaddress::class, 'showlistpage']);
 
 Route::post('/addip',[ControlIpaddress::class, 'addip'] )->name('addip');
+Route::get('/changeip/{ip_id}',[ControlIpaddress::class, 'changeippage']);
+Route::PUT('/updatelabel/{ip_id}', [ControlIpaddress::class, 'changeip']);
