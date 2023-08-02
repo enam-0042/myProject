@@ -13,18 +13,18 @@ class ControlIpaddress extends Controller
 {
     //
     public function ipHome(){
-        return view('home');
+        return view('ipOperations.home');
     }
 
     public function addippage(){
-        return view('addip');
+        return view('ipOperations.addip');
     }
 
 
     public function changeippage($ip_id){
     //    $ipadd =Iplist::find($ip_id);
         $ipadd= Iplist::where('id','=',$ip_id)->first();
-        return view('changeip', compact('ipadd'));
+        return view('ipOperations.changeip', compact('ipadd'));
 
       //  return view('home');
     }
@@ -34,7 +34,7 @@ class ControlIpaddress extends Controller
        // return view('home');
        $iplists = Iplist::all();
      // $posts = jobproject::select('SELECT * FROM iplists');
-       return view('showlist', compact('iplists'));
+       return view('ipOperations.showlist', compact('iplists'));
     }
     public function addip(Request $req){
         $req->validate([
@@ -92,7 +92,7 @@ class ControlIpaddress extends Controller
     }
     public function showchange(){
         $changes = Change::all();
-        return view('showchanges',compact('changes'));
+        return view('ipOperations.showchanges',compact('changes'));
 
     }
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Log;
+
 use Illuminate\Support\Facades\Hash;
 use Session;
 class UserAuthentication extends Controller
@@ -12,13 +14,13 @@ class UserAuthentication extends Controller
     public function login()
     {
         if(Session::has('loginId')) return redirect('/home');
-        return view("login");
+        return view("authentication.login");
     }
     public function registration()
     {
         if(Session::has('loginId')) return redirect('/home');
 
-        return view("registration");
+        return view("authentication.registration");
     }
 
 
@@ -64,8 +66,13 @@ class UserAuthentication extends Controller
         if ($user) {
             //echo "passed";
             if (Hash::check($req->password, $user->password)) {
+                $log = new Log();
+                $log->email=$req->email;
+            //    $log->token='log in';
+                $l =$log->save();
+//////
                 $req->session()->put('loginId', $user->id);
-                return redirect('home');
+                return redirect('/home');
             } else {
             return back()->with('fail', 'This Password does not match entry!! Sorry bro');
             }
@@ -78,11 +85,12 @@ class UserAuthentication extends Controller
     public function logout(){
         if(Session::has('loginId')){
            // echo "success";
+
             Session::pull('loginId');
-          return   redirect('login');
+          return   redirect('/login');
         }
         else {
-          return  redirect('login');
+          return  redirect('/login');
         }
     }
 }

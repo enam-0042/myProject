@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthentication ;
 use App\Http\Controllers\ControlIpaddress ;
+use App\Http\Controllers\LogController ;
+use App\Http\Controllers\Welcome ;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,7 @@ use App\Http\Controllers\ControlIpaddress ;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Welcome::class, 'welcome']);
 Route::get('/registration',[UserAuthentication::class, 'registration']);
 Route::get('/login',[UserAuthentication::class, 'login']);
 Route::post('/register-user',[UserAuthentication::class, 'newUserRegistration'] )->name('register-user');
@@ -34,5 +34,17 @@ Route::group(['middleware'=>['protectedPage']],function(){
     Route::get('/changeip/{ip_id}',[ControlIpaddress::class, 'changeippage']);
     Route::PUT('/updatelabel/{ip_id}', [ControlIpaddress::class, 'changeip']);
     Route::get('/showchanges',[ControlIpaddress::class, 'showchange']);
-    
+    Route::get('/log',[LogController::class,'logentry']);
 });
+
+
+
+
+
+
+// session test from different browser
+Route::get('/zzz',function(){
+    $session= session()->all();
+    print_r($session);
+});
+

@@ -33,6 +33,13 @@
     </a>
 </div>
 <div>
+    <a href="/log"> 
+        <button>
+            Show User Log data
+        </button>
+    </a>
+</div>
+<div>
     <a href="/logout"> 
         <button>
             Log Out
