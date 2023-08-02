@@ -3,17 +3,23 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>log in</title>
     </head>
 
     <body>
         <div>
             <form action="{{ route('register-user') }}" method="post">
-                @if(Session::has('success'))
-                <div>{{Session::get('success')}}</div>
-                @elseif(Session::has('fail'))
-                <div>{{Session::get('fail')}}</div>
-                @endif @csrf
+                <div>
+                    <h1>
+                        Registration
+                    </h1>
+                    @if(Session::has('success'))
+                    <div>{{Session::get('success')}}</div>
+                    @elseif(Session::has('fail'))
+                    <div>{{Session::get('fail')}}</div>
+                    @endif
+                </div>
+                @csrf
                 <label for="name">Full Name:</label><br />
                 <input
                     type="text"
@@ -38,7 +44,7 @@
                 <span> @error('password1'){{ $message }} @enderror</span> <br />
 
                 <button type="submit">Register</button> <br />
-                <a href="login"> Goto new user register</a>
+                <a href="login"> Log in Here</a>
             </form>
         </div>
     </body>

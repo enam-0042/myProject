@@ -42,7 +42,18 @@
             <button type="submit">Add this IP</button><br />
         </form>
         <div>
-            <a href="home"> Goto Home Page </a>
+            <a href="/home"> 
+                <button>
+                    Home
+                </button>
+            </a>
+        </div>
+        <div>
+            <a href="/logout"> 
+                <button>
+                    Log Out
+                </button>
+            </a>
         </div>
     </body>
 </html>

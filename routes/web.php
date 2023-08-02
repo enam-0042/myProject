@@ -22,12 +22,17 @@ Route::get('/registration',[UserAuthentication::class, 'registration']);
 Route::get('/login',[UserAuthentication::class, 'login']);
 Route::post('/register-user',[UserAuthentication::class, 'newUserRegistration'] )->name('register-user');
 Route::post('/login-user',[UserAuthentication::class, 'newUserLogin'] )->name('login-user');
-
+Route::get('/logout',[UserAuthentication::class,'logout']);
 // here is all the database part
-Route::get('/home',[ControlIpaddress::class, 'ipHome']);
-Route::get('/addip',[ControlIpaddress::class, 'addippage']);
-Route::get('/showlist',[ControlIpaddress::class, 'showlistpage']);
 
-Route::post('/addip',[ControlIpaddress::class, 'addip'] )->name('addip');
-Route::get('/changeip/{ip_id}',[ControlIpaddress::class, 'changeippage']);
-Route::PUT('/updatelabel/{ip_id}', [ControlIpaddress::class, 'changeip']);
+Route::group(['middleware'=>['protectedPage']],function(){
+    Route::get('/home',[ControlIpaddress::class, 'ipHome']);
+    Route::get('/addip',[ControlIpaddress::class, 'addippage']);
+    Route::get('/showlist',[ControlIpaddress::class, 'showlistpage']);
+    
+    Route::post('/addip',[ControlIpaddress::class, 'addip'] )->name('addip');
+    Route::get('/changeip/{ip_id}',[ControlIpaddress::class, 'changeippage']);
+    Route::PUT('/updatelabel/{ip_id}', [ControlIpaddress::class, 'changeip']);
+    Route::get('/showchanges',[ControlIpaddress::class, 'showchange']);
+    
+});

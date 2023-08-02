@@ -11,10 +11,13 @@ class UserAuthentication extends Controller
     //
     public function login()
     {
+        if(Session::has('loginId')) return redirect('/home');
         return view("login");
     }
     public function registration()
     {
+        if(Session::has('loginId')) return redirect('/home');
+
         return view("registration");
     }
 
@@ -61,7 +64,7 @@ class UserAuthentication extends Controller
         if ($user) {
             //echo "passed";
             if (Hash::check($req->password, $user->password)) {
-                $req->session()->put('loginID', $user->id);
+                $req->session()->put('loginId', $user->id);
                 return redirect('home');
             } else {
             return back()->with('fail', 'This Password does not match entry!! Sorry bro');
@@ -70,6 +73,16 @@ class UserAuthentication extends Controller
         } else {
             return back()->with('fail', 'This User is not found!! Sorry bro');
             //echo "failed";
+        }
+    }
+    public function logout(){
+        if(Session::has('loginId')){
+           // echo "success";
+            Session::pull('loginId');
+          return   redirect('login');
+        }
+        else {
+          return  redirect('login');
         }
     }
 }

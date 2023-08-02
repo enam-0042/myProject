@@ -8,6 +8,17 @@
 
     <body>
         <div>
+            <h2>
+                @if(Session::has('success'))
+                <div>{{Session::get('fail')}}</div>
+                @else
+                    <div>
+                       Enter Valid Label
+                    </div>
+                @endif
+            </h2>
+        </div>
+        <div>
             <h1>Change a label</h1>
         </div>
         <form action="{{ url('updatelabel',['id' => $ipadd->id])  }}" method="post">
@@ -41,5 +52,12 @@
         <!-- <div>
             <a href="home"> Goto Home Page </a>
         </div> -->
+        <div>
+            <a href="/logout"> 
+                <button>
+                    Log Out
+                </button>
+            </a>
+        </div>
     </body>
 </html>

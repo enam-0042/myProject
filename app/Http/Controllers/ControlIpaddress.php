@@ -66,13 +66,34 @@ class ControlIpaddress extends Controller
          [
             'labels'=>'Label must contain 3 words',
             
-        ]);
+        ]);     
+        $change= new Change();
+        
+        
         $ipadd=Iplist::find($ip_id);
+
+        $change->ipaddress=$ipadd->ipaddress;
+        $change->labels=$ipadd->labels;
+        $res=$change->save();
+
         //$ipadd->labels= $req->input('labels');
         $ipadd->labels= $req->labels;
         $ipadd->update();
-        return redirect("/showlist")->with('success', 'Label updated Successfully');
+     //   $ipadd=Iplist::find($ip_id);
+
+  
+
+        if($res){
+        return redirect("/showlist")->with('success', 'Label updated Successfully');}
+        else {
+            return redirect( url('changeip',['id' => $ip_id]) )->with('fail', 'Label updation Failed');
+        }
            // echo "hello";
+    }
+    public function showchange(){
+        $changes = Change::all();
+        return view('showchanges',compact('changes'));
+
     }
 
     // show all data

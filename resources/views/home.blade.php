@@ -7,6 +7,11 @@
 </head>
 <body>
 <div>
+    <div>
+        <h1>
+            Home
+        </h1>
+    </div>
     <a href="/addip"> 
         <button>
             Add a IP address
@@ -14,9 +19,9 @@
     </a>
 </div>
 <div>
-    <a href="/changeip"> 
+    <a href="/showchanges"> 
         <button>
-            Change a IP address's  label
+            Show all the changes what was before value
         </button>
     </a>
 </div>
@@ -24,6 +29,13 @@
     <a href="/showlist"> 
         <button>
             Show all the listed IP and label
+        </button>
+    </a>
+</div>
+<div>
+    <a href="/logout"> 
+        <button>
+            Log Out
         </button>
     </a>
 </div>
